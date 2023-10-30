@@ -1,6 +1,5 @@
 import os
-import logging
-from datetime import datetime
+# from datetime import datetime
 import time
 import torch
 import torch.nn as nn
@@ -134,8 +133,12 @@ if __name__ == '__main__':
         os.makedirs(save_path)
     else:
         assert("save path exist,please check save path")
-    #定义log保存位置
-    log_path = os.path.join(save_path,"pretrain_log.log")
+
+    #log save path
+    if not os.path.exists(os.path.join("./log",expriment_name)):
+        print("log path is",os.path.join("./log",expriment_name))
+        os.makedirs(os.path.join("./log",expriment_name))
+    log_path = os.path.join("./log",expriment_name,"train_log.log")
     # 添加log文件位置
     logger.add(log_path)
     logger.info("USE GPU %s"%gpu_id)
@@ -146,7 +149,7 @@ if __name__ == '__main__':
     print('Try to load model')
     model = Network().to(device)
     if model_path is not None:
-        model.load_backbone(torch.load(model_path, map_location=torch.device('cpu')), logging)
+        model.load_backbone(torch.load(model_path, map_location=torch.device('cpu')), logger)
         logger.info('load model from ', model_path)
         print("sussess load checkpoint")
  

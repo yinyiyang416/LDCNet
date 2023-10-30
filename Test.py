@@ -8,12 +8,8 @@ import numpy as np
 from tqdm import tqdm
 
 #import model
-from lib.Network import use_mid_ddf_PNSNet
-from lib.Network import improve_use_mid_ddf_PNSNet
 from lib.Network import LDCNet
 
-from lib.Network import test_RFB_ddfPNSNet
-from lib.Network import test_transformer_ddfPNSNet
 
 
 #import dataloader
@@ -53,7 +49,8 @@ class eval_Test:
             os.mkdir(self.save_path)
         except OSError:
             pass
-        self.log_path = os.path.join(self.save_path,"result_log.txt")
+
+        self.log_path = os.path.join(self.save_path,"eval_log.txt")
         if os.path.exists(self.log_path):
             print("Log file exists")
             # print(time.asctime(time.localtime(time.time())))
@@ -323,8 +320,9 @@ class eval_Test:
 if __name__ == "__main__":
     # test
     model = LDCNet()
-    pth_path = "PATH TO WEIGHT"
-    save_path = "./log"
+
+    pth_path = config.model_path
+    save_path = "./log/"
     mode = "kvasir"
     ex = eval_Test(model,pth_path,save_path,mode,1,0)
     ex.test()

@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
 
     
-    root_path = "./result/"
+    root_path = "./log/"
     log_path = os.path.join(root_path,"model_size_review_log.txt")
     if os.path.exists(log_path):
         print("Log file exists")
